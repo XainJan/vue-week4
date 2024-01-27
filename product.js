@@ -283,7 +283,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
        })
        //刪除產品元件
        app.component('delProductModal',{
-        props:['del'],
+        props:['del','page'],
         data(){
             return{
             url:'https://ec-course-api.hexschool.io/',
@@ -297,7 +297,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
                 axios.delete(api)
                 .then(res => {
                   delProductModal.hide()
-                  this.$emit('getProduct')
+                  this.$emit('getProduct',this.page.current_page)
                 })
                 .catch(err =>{
                   alert(err)
@@ -334,7 +334,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
        })
        //編輯產品元件
        app.component('editProductModal',{
-        props:['edit'],
+        props:['edit',],
         data(){
             return{
             url:'https://ec-course-api.hexschool.io/',
