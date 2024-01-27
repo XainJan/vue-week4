@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+</head>
+<body>
+      <div id="app">
+        <div class="container">
+          <div class="text-end mt-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+              建立新的產品
+            </button>
+          </div>
+          <table class="table mt-4">
+            <thead>
+              <tr>
+                <th width="120">
+                  分類
+                </th>
+                <th>產品名稱</th>
+                <th width="120">
+                  原價
+                </th>
+                <th width="120">
+                  售價
+                </th>
+                <th width="100">
+                  是否啟用
+                </th>
+                <th width="120">
+                  編輯
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in products" :key="item.id">
+                <td>{{ item.category }}</td>
+                <td>{{ item.title }}</td>
+                <td class="text-start">{{ item.origin_price }}</td>
+                <td class="text-start">{{ item.price }}</td>
+                <td>
+                  <span class="text-success"  :class="{'d-none':!item.is_enabled}">啟用</span>
+                  <span :class="{'d-none':item.is_enabled}">未啟用</span>
+                </td>
+                <td>
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary btn-sm"   @click="editProduct(item)">
+                      編輯
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-sm " @click="checkDelProduct(item)" >
+                      刪除
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination :page="pagination" @emit-page="getProduct"></pagination>
+        </div>
+      
+         <!-- Modal -->
+      
+      <product-modal :item="tempProduct"  @get-product="getProduct" @clear-form="clearForm" :page="pagination"></product-modal>
+      <del-product-modal :del="tempDelProduct" @get-product="getProduct"></del-product-modal>
+      <edit-product-modal :edit="tempProduct" @clear-form="clearForm" @get-product="getProduct" @hide-modal="hideModal" ></edit-product-modal>
+        
+
+        
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
+        <script src="./product.js" type="module"></script>
+    </body>
+
+</html>
