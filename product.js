@@ -150,13 +150,14 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
                   productModal.hide();
                 })
                 .catch(err => {
-                  alert(err)
+                  alert(err.response.data.message)
                 })
               },
               addImages(){
                 this.item.data.imagesUrl= []
                 this.item.data.imagesUrl.push('')
               }, 
+           
              
         },
        
@@ -269,7 +270,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-outline-secondary" @click="clearForm" data-bs-dismiss="modal">
                   取消
                 </button>
                 <button type="button" class="btn btn-primary" @click="upProduct">
@@ -300,7 +301,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
                   this.$emit('getProduct',this.page.current_page)
                 })
                 .catch(err =>{
-                  alert(err)
+                  alert(err.response.data.message)
                 })
               },
         },
@@ -334,7 +335,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
        })
        //編輯產品元件
        app.component('editProductModal',{
-        props:['edit',],
+        props:['edit','clearForm'],
         data(){
             return{
             url:'https://ec-course-api.hexschool.io/',
@@ -356,7 +357,7 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
     
                 })
                 .catch(err => {
-                  alert(err)
+                  alert(err.response.data.message)
                 })
                 
                 
@@ -365,6 +366,8 @@ import {createApp} from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
                 this.edit.data.imagesUrl= []
                 this.edit.data.imagesUrl.push('')
               }, 
+              
+              
             
         },
         

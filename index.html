@@ -65,9 +65,9 @@
       
          <!-- Modal -->
       
-      <product-modal :item="tempProduct"  @get-product="getProduct" @clear-form="clearForm" :page="pagination"></product-modal>
+      <product-modal :item="tempProduct"  @get-product="getProduct" :clear-form="clearForm" :page="pagination"></product-modal>
       <del-product-modal :del="tempDelProduct" @get-product="getProduct" :page="pagination"></del-product-modal>
-      <edit-product-modal :edit="tempProduct" @clear-form="clearForm" @get-product="getProduct" @hide-modal="hideModal" ></edit-product-modal>
+      <edit-product-modal :edit="tempProduct" :clear-form="clearForm" @get-product="getProduct" @hide-modal="hideModal" ></edit-product-modal>
         
 
         
